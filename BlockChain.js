@@ -1,4 +1,5 @@
 const Block = require('./Block');
+const config = require('./config');
 class BlockChain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
@@ -14,7 +15,7 @@ class BlockChain {
 
   addNewBlock(newBlock){
     newBlock.previousHash = this.getLatestBlock().hash;
-    newBlock.hash = newBlock.calculateHash();
+    newBlock.mineBlock(config.difficulty);
     this.chain.push(newBlock);
   }
 
