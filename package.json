@@ -4,8 +4,10 @@
   "description": "My very own Cryptocurrency - JS/Node based",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "nodemon dev.js"
   },
+  "type": "module",
   "keywords": [
     "Blockchain"
   ],
