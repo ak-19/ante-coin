@@ -4,8 +4,13 @@
   "description": "My very own Cryptocurrency - JS/Node based",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watchAll",
     "dev": "nodemon dev.js"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "type": "module",
   "keywords": [
@@ -17,6 +22,8 @@
     "crypto-js": "^4.1.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.19.1",
+    "babel-jest": "^29.0.3",
     "jest": "^27.4.7"
   }
 }
