@@ -1,5 +1,5 @@
 import Block from './block.js'
 
-const b = new Block('123123123123', '123123123123', '123123123123123123', 'this is data');
+const testblock = Block.mineBlock(Block.genesis(), 'test block');
 
-console.log(b.toString());
+console.log(testblock.toString());
