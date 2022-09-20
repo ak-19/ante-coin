@@ -32,4 +32,19 @@ describe('Blockchain', () => {
             expect(bc.isValid(bc2.chain)).toBe(true);
         });
     });
+
+    describe('When genesis block is corrupted', () => {
+        test('validation should fail', () => {
+            bc.chain[0].data = 'bad-data';
+            expect(bc2.isValid(bc.chain)).toBe(false);
+        });
+    });
+
+    describe('When newly added block data is corrupted', () => {
+        test('validations hsould fail of the group', () => {
+            bc2.addBlock('not-corrupt');
+            bc2.chain[1].data = 'corrupt';
+            expect(bc.isValid(bc2.chain)).toBe(false)
+        });
+    });
 });
