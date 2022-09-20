@@ -1,5 +1,4 @@
-import cryptoJs from 'crypto-js';
-const { SHA256 } = cryptoJs;
+import sha256 from 'crypto-js/sha256';
 
 class Block {
     constructor(timestamp, lastHash, hash, data) {
@@ -22,19 +21,19 @@ class Block {
     }
 
     static mineBlock(lastBlock, data) {
-        const timeStamp = Date.now();
+        const timestamp = Date.now();
         const lastHash = lastBlock.hash;
-        const hash = Block.hash(timeStamp, lastHash, data);
-        return new this(timeStamp, lastHash, hash, data);
+        const hash = Block.hash(timestamp, lastHash, data);
+        return new Block(timestamp, lastHash, hash, data);
     }
 
-    static hash(timeStamp, lastHash, data) {
-        return SHA256(`${timeStamp}${lastHash}${data}`).toString();
+    static hash(timestamp, lastHash, data) {
+        return sha256(`${timestamp}${lastHash}${data}`).toString();
     }
 
     static generateHash(block) {
-        const { timeStamp, lastHash, data } = block;
-        return Block.hash(timeStamp, lastHash, data);
+        const { timestamp, lastHash, data } = block;
+        return Block.hash(timestamp, lastHash, data);
     }
 }
 

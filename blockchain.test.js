@@ -2,10 +2,11 @@ import Block from './block.js';
 import Blockchain from './blockchain.js';
 
 describe('Blockchain', () => {
-    let bc;
+    let bc, bc2;
 
     beforeEach(() => {
         bc = new Blockchain();
+        bc2 = new Blockchain();
     });
 
     describe('When created', () => {
@@ -22,6 +23,13 @@ describe('Blockchain', () => {
             const lastBlock = bc.chain[bc.chain.length - 1];
             expect(newBlock).toHaveProperty('data', data)
             expect(lastBlock).toHaveProperty('data', data)
+        });
+    });
+
+    describe('Validate the chain after adding the block', () => {
+        test('should return true', () => {
+            bc2.addBlock('test-data-1');
+            expect(bc.isValid(bc2.chain)).toBe(true);
         });
     });
 });

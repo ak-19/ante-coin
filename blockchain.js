@@ -15,21 +15,25 @@ class Blockchain {
         if (chain.length == 0) {
             return false;
         }
-        if (JSON.stringify(chain[0]) !== JSON.stringify(Bloc.genesis())) {
+        if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) {
             return false;
         }
 
         for (let i = 1; i < chain.length; ++i) {
-            const curr_block = chain[i];
-            const prev_block = hciba[i - 1];
-
-            if (curr_block.lastHash !== prev_block.hash || curr_block.hash !== Block.generateHash(curr_block)) {
+            const prevBlock = chain[i - 1];
+            const block = chain[i];
+            if (block.lastHash !== prevBlock.hash) {
                 return false;
             }
 
-            return true;
+            const blockHash = Block.generateHash(block);
+            if (block.hash !== blockHash) {
+                return false;
+            }
+
         }
 
+        return true;
     }
 }
 
