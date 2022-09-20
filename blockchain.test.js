@@ -47,4 +47,20 @@ describe('Blockchain', () => {
             expect(bc.isValid(bc2.chain)).toBe(false)
         });
     });
+
+    describe('When replacing chain with new valid chain', () => {
+        test('there should be no problems', () => {
+            bc2.addBlock('new-block')
+            bc.replaceChain(bc2.chain);
+            expect(bc.chain).toEqual(bc2.chain)
+        });
+    });
+
+    describe('Replacing with smaller chain', () => {
+        test('should fail', () => {
+            bc.addBlock('test-block-1');
+            bc.replaceChain(bc2.chain);
+            expect(bc.chain).not.toEqual(bc2.chain);
+        });
+    });
 });
